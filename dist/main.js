@@ -12,7 +12,7 @@ async function bootstrap() {
         .addApiKey({ type: 'apiKey', name: 'x-api-key', in: 'header' }, 'apiKey')
         .build();
     const document = swagger_1.SwaggerModule.createDocument(app, swaggerConfig);
-    swagger_1.SwaggerModule.setup('docs', app, document);
+    swagger_1.SwaggerModule.setup('api', app, document);
     await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

@@ -48,7 +48,7 @@ let ApiKeyGuard = class ApiKeyGuard {
     canActivate(context) {
         const request = context.switchToHttp().getRequest();
         const url = (request.originalUrl || request.url);
-        if (url.startsWith('/docs')) {
+        if (url.startsWith('/docs') || url.startsWith('/api')) {
             return true;
         }
         const headerKey = request.headers['x-api-key'];

@@ -12,7 +12,7 @@ export class ApiKeyGuard implements CanActivate {
 
     // Allow Swagger docs and assets without API key
     const url: string = (request.originalUrl || request.url) as string;
-    if (url.startsWith('/docs')) {
+    if (url.startsWith('/docs') || url.startsWith('/api')) {
       return true;
     }
 
