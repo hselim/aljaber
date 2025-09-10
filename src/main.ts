@@ -4,7 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  // app.setGlobalPrefix('api');
+  app.setGlobalPrefix('api');
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Aljaber API')

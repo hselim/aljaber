@@ -8,17 +8,13 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
-const core_1 = require("@nestjs/core");
-const api_key_guard_1 = require("./api-key.guard");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const orders_controller_1 = require("./orders.controller");
 const orders_service_1 = require("./orders.service");
 const items_controller_1 = require("./items.controller");
-const request_logger_middleware_1 = require("./request-logger.middleware");
 let AppModule = class AppModule {
     configure(consumer) {
-        consumer.apply(request_logger_middleware_1.RequestLoggerMiddleware).forRoutes('*');
     }
 };
 exports.AppModule = AppModule;
@@ -26,7 +22,7 @@ exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [],
         controllers: [app_controller_1.AppController, orders_controller_1.OrdersController, items_controller_1.ItemsController],
-        providers: [app_service_1.AppService, orders_service_1.OrdersService, { provide: core_1.APP_GUARD, useClass: api_key_guard_1.ApiKeyGuard }],
+        providers: [app_service_1.AppService, orders_service_1.OrdersService],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map
