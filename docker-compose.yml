@@ -9,14 +9,13 @@ services:
       - "3000:3000"
     volumes:
       - ./:/src
-      - backend_node_modules:/src/node_modules
     networks:
       - nest_network
     restart: always
     environment:
       - NODE_ENV=development
       - LOG_LEVEL=debug
-    command: npm run start:dev
+    command: sh -c "npm run build && npm run start:prod"
 
 
 networks:

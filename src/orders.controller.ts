@@ -14,6 +14,7 @@ export class OrdersController {
     schema: {
       type: 'object',
       properties: {
+        id: { type: 'number', example: 1 },
         accountNumber: { type: 'string', example: 'ACC123' },
         lensCode: { type: 'string', example: 'PMXG' },
         sphere: { type: 'number', example: -7.75 },
@@ -21,12 +22,13 @@ export class OrdersController {
         diameter: { type: 'number', example: 70 },
         frameId: { type: 'string', example: 'F-1' },
       },
-      required: ['accountNumber', 'lensCode', 'sphere', 'cylinder', 'diameter', 'frameId'],
+      required: ['id', 'accountNumber', 'lensCode', 'sphere', 'cylinder', 'diameter', 'frameId'],
     },
     examples: {
       sample: {
         summary: 'Typical order',
         value: {
+          id: 1,
           accountNumber: 'ACC123',
           lensCode: 'PMXG',
           sphere: -7.75,

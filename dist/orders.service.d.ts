@@ -7,10 +7,9 @@ export type Order = {
     diameter: number;
     frameId: string;
 };
-export type CreateOrderInput = Omit<Order, 'id'>;
+export type CreateOrderInput = Order;
 export declare class OrdersService {
     private orders;
-    private nextId;
     createOrder(input: CreateOrderInput): Order;
     getOrderById(id: number): Order | undefined;
 }

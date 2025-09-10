@@ -10,10 +10,10 @@ exports.OrdersService = void 0;
 const common_1 = require("@nestjs/common");
 let OrdersService = class OrdersService {
     orders = [];
-    nextId = 1;
     createOrder(input) {
-        const newOrder = {
-            id: this.nextId++,
+        const existingIndex = this.orders.findIndex((o) => o.id === input.id);
+        const order = {
+            id: input.id,
             accountNumber: input.accountNumber,
             lensCode: input.lensCode,
             sphere: input.sphere,
@@ -21,8 +21,13 @@ let OrdersService = class OrdersService {
             diameter: input.diameter,
             frameId: input.frameId,
         };
-        this.orders.push(newOrder);
-        return newOrder;
+        if (existingIndex >= 0) {
+            this.orders[existingIndex] = order;
+        }
+        else {
+            this.orders.push(order);
+        }
+        return order;
     }
     getOrderById(id) {
         return this.orders.find((o) => o.id === id);

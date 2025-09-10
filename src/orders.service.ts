@@ -10,16 +10,16 @@ export type Order = {
   frameId: string;
 };
 
-export type CreateOrderInput = Omit<Order, 'id'>;
+export type CreateOrderInput = Order; // client provides id in the request
 
 @Injectable()
 export class OrdersService {
   private orders: Order[] = [];
-  private nextId = 1;
 
   createOrder(input: CreateOrderInput): Order {
-    const newOrder: Order = {
-      id: this.nextId++,
+    const existingIndex = this.orders.findIndex((o) => o.id === input.id);
+    const order: Order = {
+      id: input.id,
       accountNumber: input.accountNumber,
       lensCode: input.lensCode,
       sphere: input.sphere,
@@ -27,8 +27,12 @@ export class OrdersService {
       diameter: input.diameter,
       frameId: input.frameId,
     };
-    this.orders.push(newOrder);
-    return newOrder;
+    if (existingIndex >= 0) {
+      this.orders[existingIndex] = order;
+    } else {
+      this.orders.push(order);
+    }
+    return order;
   }
 
   getOrderById(id: number): Order | undefined {
