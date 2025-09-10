@@ -1,0 +1,39 @@
+services:
+  redis:
+    image: redis:latest
+    container_name: redis
+   
+    networks:
+      - nest_network
+    restart: unless-stopped
+ 
+  backend_service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_service
+    ports:
+      - "3030:3000"
+    volumes:
+      - ./:/src
+      - backend_node_modules:/src/node_modules
+    networks:
+      - nest_network
+    restart: always
+    environment:
+      - NODE_ENV=development
+      - LOG_LEVEL=debug
+    command: npm run start:dev
+    depends_on:
+      - redis
+
+networks:
+  nest_network:
+    driver: bridge
+
+volumes:
+  backend_node_modules:
+    driver: local
+
+
+
