@@ -14,6 +14,7 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.OrdersController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const orders_service_1 = require("./orders.service");
 let OrdersController = class OrdersController {
     ordersService;
@@ -34,6 +35,49 @@ let OrdersController = class OrdersController {
 exports.OrdersController = OrdersController;
 __decorate([
     (0, common_1.Post)(),
+    (0, swagger_1.ApiBody)({
+        description: 'Create an order',
+        schema: {
+            type: 'object',
+            properties: {
+                accountNumber: { type: 'string', example: 'ACC123' },
+                lensCode: { type: 'string', example: 'PMXG' },
+                sphere: { type: 'number', example: -7.75 },
+                cylinder: { type: 'number', example: 0.25 },
+                diameter: { type: 'number', example: 70 },
+                frameId: { type: 'string', example: 'F-1' },
+            },
+            required: ['accountNumber', 'lensCode', 'sphere', 'cylinder', 'diameter', 'frameId'],
+        },
+        examples: {
+            sample: {
+                summary: 'Typical order',
+                value: {
+                    accountNumber: 'ACC123',
+                    lensCode: 'PMXG',
+                    sphere: -7.75,
+                    cylinder: 0.25,
+                    diameter: 70,
+                    frameId: 'F-1',
+                },
+            },
+        },
+    }),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'Created order',
+        schema: {
+            type: 'object',
+            properties: {
+                id: { type: 'number', example: 1 },
+                accountNumber: { type: 'string', example: 'ACC123' },
+                lensCode: { type: 'string', example: 'PMXG' },
+                sphere: { type: 'number', example: -7.75 },
+                cylinder: { type: 'number', example: 0.25 },
+                diameter: { type: 'number', example: 70 },
+                frameId: { type: 'string', example: 'F-1' },
+            },
+        },
+    }),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
@@ -41,12 +85,29 @@ __decorate([
 ], OrdersController.prototype, "createOrder", null);
 __decorate([
     (0, common_1.Get)(':orderId'),
+    (0, swagger_1.ApiParam)({ name: 'orderId', type: Number, example: 1 }),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'Found order',
+        schema: {
+            type: 'object',
+            properties: {
+                id: { type: 'number', example: 1 },
+                accountNumber: { type: 'string', example: 'ACC123' },
+                lensCode: { type: 'string', example: 'PMXG' },
+                sphere: { type: 'number', example: -7.75 },
+                cylinder: { type: 'number', example: 0.25 },
+                diameter: { type: 'number', example: 70 },
+                frameId: { type: 'string', example: 'F-1' },
+            },
+        },
+    }),
     __param(0, (0, common_1.Param)('orderId', common_1.ParseIntPipe)),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Object)
 ], OrdersController.prototype, "getOrder", null);
 exports.OrdersController = OrdersController = __decorate([
+    (0, swagger_1.ApiTags)('orders'),
     (0, common_1.Controller)('orders'),
     __metadata("design:paramtypes", [orders_service_1.OrdersService])
 ], OrdersController);

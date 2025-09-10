@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ItemsController = void 0;
 const common_1 = require("@nestjs/common");
+const swagger_1 = require("@nestjs/swagger");
 const RAW_ITEMS = [
     ['PMXG', 'Aspheric 1.74 Diamond+ PRO UV400', 'EGMA', 1.74, -7.75, 0.25, 70],
     ['PMXG', 'Aspheric 1.74 Diamond+ PRO UV400', 'EGMA', 1.74, -8, 0.5, 70],
@@ -105,11 +106,41 @@ let ItemsController = class ItemsController {
 exports.ItemsController = ItemsController;
 __decorate([
     (0, common_1.Get)(),
+    (0, swagger_1.ApiOkResponse)({
+        description: 'List of lens items',
+        schema: {
+            type: 'array',
+            items: {
+                type: 'object',
+                properties: {
+                    code: { type: 'string', example: 'PMXG' },
+                    name: { type: 'string', example: 'Aspheric 1.74 Diamond+ PRO UV400' },
+                    brand: { type: 'string', example: 'EGMA' },
+                    index: { type: 'number', example: 1.74 },
+                    sphere: { type: 'number', example: -7.75 },
+                    cylinder: { type: 'number', example: 0.25 },
+                    diameter: { type: 'number', example: 70 },
+                },
+            },
+            example: [
+                {
+                    code: 'PMXG',
+                    name: 'Aspheric 1.74 Diamond+ PRO UV400',
+                    brand: 'EGMA',
+                    index: 1.74,
+                    sphere: -7.75,
+                    cylinder: 0.25,
+                    diameter: 70,
+                },
+            ],
+        },
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
 ], ItemsController.prototype, "list", null);
 exports.ItemsController = ItemsController = __decorate([
+    (0, swagger_1.ApiTags)('items'),
     (0, common_1.Controller)('items')
 ], ItemsController);
 //# sourceMappingURL=items.controller.js.map

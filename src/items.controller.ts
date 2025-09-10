@@ -1,4 +1,5 @@
 import { Controller, Get } from '@nestjs/common';
+import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
 export type Item = {
   code: string; // PMXG
@@ -100,9 +101,39 @@ const ITEMS: Item[] = RAW_ITEMS.map(([code, name, brand, index, sphere, cylinder
   diameter: Number(diameter),
 }));
 
+@ApiTags('items')
 @Controller('items')
 export class ItemsController {
   @Get()
+  @ApiOkResponse({
+    description: 'List of lens items',
+    schema: {
+      type: 'array',
+      items: {
+        type: 'object',
+        properties: {
+          code: { type: 'string', example: 'PMXG' },
+          name: { type: 'string', example: 'Aspheric 1.74 Diamond+ PRO UV400' },
+          brand: { type: 'string', example: 'EGMA' },
+          index: { type: 'number', example: 1.74 },
+          sphere: { type: 'number', example: -7.75 },
+          cylinder: { type: 'number', example: 0.25 },
+          diameter: { type: 'number', example: 70 },
+        },
+      },
+      example: [
+        {
+          code: 'PMXG',
+          name: 'Aspheric 1.74 Diamond+ PRO UV400',
+          brand: 'EGMA',
+          index: 1.74,
+          sphere: -7.75,
+          cylinder: 0.25,
+          diameter: 70,
+        },
+      ],
+    },
+  })
   list() {
     return ITEMS;
   }
