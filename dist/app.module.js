@@ -13,7 +13,11 @@ const app_service_1 = require("./app.service");
 const orders_controller_1 = require("./orders.controller");
 const orders_service_1 = require("./orders.service");
 const items_controller_1 = require("./items.controller");
+const request_logger_middleware_1 = require("./request-logger.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer.apply(request_logger_middleware_1.RequestLoggerMiddleware).forRoutes('*');
+    }
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
