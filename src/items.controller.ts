@@ -102,7 +102,7 @@ const ITEMS: Item[] = RAW_ITEMS.map(([code, name, brand, index, sphere, cylinder
 }));
 
 @ApiTags('items')
-@Controller('items')
+@Controller('/api/citems')
 export class ItemsController {
   @Get()
   @ApiOkResponse({

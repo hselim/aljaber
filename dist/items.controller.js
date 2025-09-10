@@ -141,6 +141,6 @@ __decorate([
 ], ItemsController.prototype, "list", null);
 exports.ItemsController = ItemsController = __decorate([
     (0, swagger_1.ApiTags)('items'),
-    (0, common_1.Controller)('items')
+    (0, common_1.Controller)('/api/citems')
 ], ItemsController);
 //# sourceMappingURL=items.controller.js.map

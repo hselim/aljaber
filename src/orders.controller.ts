@@ -4,10 +4,11 @@ import { OrdersService } from './orders.service';
 import type { CreateOrderInput, Order } from './orders.service';
 
 @ApiTags('orders')
-@Controller('orders')
+@Controller('/api/orders')
 export class OrdersController {
   constructor(private readonly ordersService: OrdersService) {}
 
+  
   @Post()
   @ApiBody({
     description: 'Create an order',
